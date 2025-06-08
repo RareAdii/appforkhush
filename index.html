@@ -3,52 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khushi ❤️ Aditya | PCM Study + Love</title>
+    <title>Khushi ❤️ Aditya | Love + Study</title>
     <style>
-        /* New Theme: Green + Blue + Black + Pink */
+        /* Romantic Theme: Pink + Blue + Hearts */
         :root {
-            --black: #000000;
-            --green: #00ff88;
-            --blue: #00a8ff;
             --pink: #ff0f7b;
-            --dark-bg: #0a0a0a;
-            --yellow: #fff700;
+            --blue: #00a8ff;
+            --black: #0a0a0a;
+            --white: #ffffff;
         }
 
         body {
             font-family: 'Arial', sans-serif;
-            background: var(--dark-bg);
+            background: var(--black);
             margin: 0;
             padding: 0;
-            color: white;
-            overflow-x: hidden;
-        }
-
-        /* Splash Screen (Yellow Glow Text) */
-        #splash {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.imgur.com/XYZ123.jpg') no-repeat center/cover;
-            z-index: 9999;
+            color: var(--white);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-        }
-
-        #splash h1 {
-            color: var(--yellow);
-            text-shadow: 0 0 15px var(--yellow), 0 0 30px var(--yellow);
-            font-size: 1.8em;
+            min-height: 100vh;
             text-align: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
         }
 
-        /* PIN Lock Screen (No Hint) */
+        /* PIN Lock Screen */
         #lock-screen {
             position: fixed;
             top: 0;
@@ -56,108 +34,129 @@
             width: 100%;
             height: 100%;
             background: var(--black);
-            z-index: 9998;
+            z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: 'Courier New', monospace;
-        }
-
-        #lock-screen h1 {
-            color: var(--green);
-            text-align: center;
-            font-size: 1.5em;
-            margin-bottom: 20px;
         }
 
         #pin-input {
             background: transparent;
-            border: 2px solid var(--blue);
-            color: white;
+            border: 2px solid var(--pink);
+            color: var(--white);
             font-size: 1.5em;
             padding: 10px;
             width: 150px;
             text-align: center;
             border-radius: 5px;
+            margin: 10px;
             outline: none;
         }
 
         #pin-submit {
-            margin-top: 15px;
             background: var(--pink);
-            color: white;
+            color: var(--white);
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
-            cursor: pointer;
             font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Splash Screen (After PIN) */
+        #splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/XYZ123.jpg') no-repeat center/cover;
+            z-index: 9998;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #splash h1 {
+            color: #fff700;
+            text-shadow: 0 0 10px #fff700;
+            font-size: 1.8em;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
         }
 
         /* Main Content */
         #main-content {
             display: none;
-            opacity: 0;
-            transition: opacity 1s;
-            padding-bottom: 50px;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        /* Mobile-Optimized Buttons */
+        /* Centered Buttons */
         .btn {
-            background: linear-gradient(45deg, var(--blue), var(--green));
+            background: linear-gradient(45deg, var(--pink), var(--blue));
+            color: var(--white);
             border: none;
-            color: var(--black);
             padding: 12px 0;
-            margin: 10px 5px;
+            margin: 10px auto;
             border-radius: 8px;
             font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
             width: 90%;
             max-width: 300px;
-            display: block;
-            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
+            transform: scale(1.05);
         }
 
-        /* Instagram Love Birds Button */
-        .insta-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* Instagram Buttons */
+        .insta-container {
+            display: none;
+            flex-direction: column;
             gap: 10px;
-            background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
-            color: white;
+            margin: 15px auto;
+            width: 90%;
+            max-width: 300px;
+        }
+
+        .insta-btn {
+            background: linear-gradient(45deg, #833ab4, #fd1d1d);
+            color: var(--white);
             padding: 12px;
             border-radius: 8px;
-            margin: 15px auto;
-            width: 80%;
             text-decoration: none;
             font-weight: bold;
         }
 
-        /* Tools Section (Hidden Initially) */
-        #tools-section {
+        /* Timer with Kiss Animation */
+        #timer {
             display: none;
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--pink);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px;
+            margin: 20px auto;
         }
 
-        .tool-btn {
-            background: rgba(0, 168, 255, 0.2);
-            border: 1px solid var(--blue);
-            color: white;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
+        #time-display {
+            font-size: 3em;
+            margin: 10px 0;
+            color: var(--pink);
+        }
+
+        #kiss-animation {
+            display: none;
+            font-size: 4em;
+            animation: kiss 2s infinite;
+        }
+
+        @keyframes kiss {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
 
         /* Floating Hearts */
@@ -176,66 +175,43 @@
     </style>
 </head>
 <body>
-    <!-- Splash Screen -->
-    <div id="splash">
-        <h1>Khushi Dhanoa ❤️ Aditya Sharma<br>Loading Your Love...</h1>
-    </div>
-
     <!-- PIN Lock -->
     <div id="lock-screen">
-        <h1>🔒 Enter Secret PIN</h1>
-        <input type="password" id="pin-input" maxlength="3">
-        <button id="pin-submit">Unlock</button>
+        <h1>🔒 Enter Our Secret PIN</h1>
+        <input type="password" id="pin-input" placeholder="***" maxlength="3">
+        <button id="pin-submit">Unlock Love</button>
+    </div>
+
+    <!-- Splash Screen (After PIN) -->
+    <div id="splash">
+        <h1>Khushi Dhanoa ❤️ Aditya Sharma</h1>
     </div>
 
     <!-- Main Content -->
     <div id="main-content">
-        <header style="text-align: center; padding: 15px;">
-            <h1 style="font-size: 1.8em;">Hey Khushi! ❤️</h1>
-            <p>Let's study PCM together! - Aditya</p>
-        </header>
+        <h1 style="color: var(--pink);">Hey Khushi! ❤️</h1>
+        <p>Made for you by Aditya Sharma</p>
 
-        <!-- Instagram Button -->
-        <a href="https://www.instagram.com/adii.iq/" target="_blank" class="insta-btn">
-            Aditya ❤️ Khushi
-        </a>
-
-        <!-- Main Buttons -->
-        <button class="btn" onclick="showChatbot()">Chat with Aditya-Bot 💬</button>
-        <button class="btn" onclick="showTest()">Practice Test 📝</button>
-        <button class="btn" onclick="showTools()">Magic Tools 🛠️</button>
-        <button class="btn" onclick="showTimer()">Study Timer ⏳</button>
-        <button class="btn" onclick="showTodo()">To-Do List 📋</button>
-
-        <!-- Tools Section -->
-        <div id="tools-section">
-            <div class="tool-btn" onclick="alert('Tool 1: Coming Soon!')">Periodic Table</div>
-            <div class="tool-btn" onclick="alert('Tool 2: Coming Soon!')">Formula Cheat Sheet</div>
-            <div class="tool-btn" onclick="alert('Tool 3: Coming Soon!')">Motivational Quotes</div>
-            <div class="tool-btn" onclick="alert('Tool 4: Coming Soon!')">PCM Jokes</div>
-            <div class="tool-btn" onclick="alert('Tool 5: Coming Soon!')">Secret Love Notes</div>
+        <!-- Instagram Button (Triggers 2 Buttons) -->
+        <button class="btn" onclick="showInstaButtons()">Meet the Love Birds 💑</button>
+        <div id="insta-container" class="insta-container">
+            <a href="https://www.instagram.com/adii.iq/" target="_blank" class="insta-btn">Aditya's Insta 👦</a>
+            <a href="https://www.instagram.com/khus.hidhanoa/" target="_blank" class="insta-btn">Khushi's Insta 👧</a>
         </div>
 
-        <!-- Hidden Sections (Chatbot, Test, Timer, Todo) -->
-        <div id="chatbot" style="display: none; margin: 15px; padding: 15px; background: rgba(0,0,0,0.7); border-radius: 10px;">
-            <h3>Aditya-Bot:</h3>
-            <p>"Khushi, padhlo warna main ro dunga! 😭"</p>
-            <input type="text" placeholder="Type here..." style="width: 80%; padding: 8px; border-radius: 5px; border: 1px solid var(--blue);">
-            <button class="btn" style="width: 50%; margin-top: 10px;">Send</button>
-        </div>
+        <!-- Feature Buttons -->
+        <button class="btn" onclick="window.open('https://deepai.org/chat', '_blank')">Chat with Aditya 💬</button>
+        <button class="btn" onclick="startTimer()">Study Timer ⏳</button>
+        <button class="btn" onclick="alert('Coming soon! 🎮')">Mini Games 🎮</button>
+        <button class="btn" onclick="alert('Coming soon! 📝')">PCM Notes 📚</button>
 
-        <div id="timer" style="display: none; text-align: center; margin: 20px;">
-            <h3>⏳ Study Timer</h3>
-            <h1 id="time-display">25:00</h1>
+        <!-- Timer Section -->
+        <div id="timer">
+            <h2>⏳ Study Timer</h2>
+            <div id="time-display">25:00</div>
             <button class="btn" onclick="startTimer()">Start</button>
             <button class="btn" onclick="resetTimer()">Reset</button>
-        </div>
-
-        <div id="todo" style="display: none; margin: 15px;">
-            <h3>📋 To-Do List</h3>
-            <input type="text" id="task-input" placeholder="Add a task..." style="width: 80%; padding: 8px; border-radius: 5px; border: 1px solid var(--blue);">
-            <button class="btn" onclick="addTask()" style="width: 50%; margin-top: 10px;">Add</button>
-            <ul id="task-list" style="list-style: none; padding: 0;"></ul>
+            <div id="kiss-animation">💋</div>
         </div>
 
         <!-- Floating Hearts -->
@@ -243,28 +219,69 @@
     </div>
 
     <script>
-        // Splash Screen (2 seconds)
-        setTimeout(() => {
-            document.getElementById('splash').style.display = 'none';
-        }, 2000);
-
         // PIN Lock (143)
         document.getElementById('pin-submit').addEventListener('click', () => {
             if (document.getElementById('pin-input').value === '143') {
                 document.getElementById('lock-screen').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                setTimeout(() => { document.getElementById('main-content').style.opacity = '1'; }, 100);
-                createHearts(); // Start hearts animation
+                document.getElementById('splash').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('splash').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                    createHearts();
+                }, 2000);
             } else {
-                alert('Wrong PIN! Try again.');
+                alert('Wrong PIN! Try our anniversary? 😉');
                 document.getElementById('pin-input').value = '';
             }
         });
 
+        // Instagram Buttons
+        function showInstaButtons() {
+            document.getElementById('insta-container').style.display = 'flex';
+        }
+
+        // Timer Logic
+        let timerInterval;
+        let timeLeft = 1500; // 25 minutes
+
+        function startTimer() {
+            document.getElementById('timer').style.display = 'block';
+            document.getElementById('kiss-animation').style.display = 'none';
+            clearInterval(timerInterval);
+            timeLeft = 1500;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('kiss-animation').style.display = 'block';
+                    document.getElementById('time-display').style.display = 'none';
+                    alert("Time's up! Khushi, now kiss Aditya! 💋");
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 1500;
+            document.getElementById('time-display').style.display = 'block';
+            document.getElementById('kiss-animation').style.display = 'none';
+            updateTimerDisplay();
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('time-display').textContent = 
+                `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
         // Floating Hearts
         function createHearts() {
             const container = document.getElementById('hearts-container');
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 20; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
                 heart.innerHTML = '❤️';
@@ -273,77 +290,6 @@
                 heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
                 container.appendChild(heart);
             }
-        }
-
-        // Toggle Sections
-        function showChatbot() {
-            hideAllSections();
-            document.getElementById('chatbot').style.display = 'block';
-        }
-
-        function showTools() {
-            hideAllSections();
-            document.getElementById('tools-section').style.display = 'block';
-        }
-
-        function showTimer() {
-            hideAllSections();
-            document.getElementById('timer').style.display = 'block';
-        }
-
-        function showTodo() {
-            hideAllSections();
-            document.getElementById('todo').style.display = 'block';
-        }
-
-        function hideAllSections() {
-            document.getElementById('chatbot').style.display = 'none';
-            document.getElementById('tools-section').style.display = 'none';
-            document.getElementById('timer').style.display = 'none';
-            document.getElementById('todo').style.display = 'none';
-        }
-
-        // Timer Logic
-        let timerInterval;
-        let timeLeft = 1500; // 25 minutes
-
-        function startTimer() {
-            clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay();
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    alert("Time's up! Khushi, take a break ❤️");
-                }
-            }, 1000);
-        }
-
-        function resetTimer() {
-            clearInterval(timerInterval);
-            timeLeft = 1500;
-            updateTimerDisplay();
-        }
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            document.getElementById('time-display').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-
-        // To-Do List
-        function addTask() {
-            const input = document.getElementById('task-input');
-            if (input.value.trim() === '') return;
-
-            const taskList = document.getElementById('task-list');
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <span>${input.value}</span>
-                <button onclick="this.parentElement.remove()" style="margin-left: 10px; background: var(--pink); border: none; color: white; border-radius: 3px;">✓</button>
-            `;
-            taskList.appendChild(li);
-            input.value = '';
         }
     </script>
 </body>
